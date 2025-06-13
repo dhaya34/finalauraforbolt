@@ -1,25 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>aura-task-keeper</title>
-      <link rel="manifest" href="manifest.json" />
-    <meta name="description" content="Lovable Generated Project" />
-    <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="aura-task-keeper" />
-    <meta property="og:description" content="Lovable Generated Project" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link rel="manifest" href="manifest.json">
+    <meta name="description" content="Lovable Generated Project">
+    <meta name="author" content="Lovable">
+    
+    <meta property="og:title" content="aura-task-keeper">
+    <meta property="og:description" content="Lovable Generated Project">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@lovable_dev">
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png">
+    
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="components.css">
+</head>
+<body>
+    <div id="root">
+        <!-- Main App Container -->
+        <div id="app-container"></div>
+        
+        <!-- Toast Container -->
+        <div id="toast-container" class="fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]"></div>
+        
+        <!-- Modal Container -->
+        <div id="modal-container"></div>
+    </div>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+        import { getFirestore } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyABM2X6jozTVX-PDKBwAtxwHYDhZkJoFUU",
+            authDomain: "tasking-14b53.firebaseapp.com",
+            projectId: "tasking-14b53",
+            storageBucket: "tasking-14b53.firebasestorage.app",
+            messagingSenderId: "1575818913",
+            appId: "1:1575818913:web:88784ee928df8a43c3c2e0"
+        };
+        
+        window.firebaseApp = initializeApp(firebaseConfig);
+        window.db = getFirestore(window.firebaseApp);
+    </script>
+    
+    <script src="utils.js"></script>
+    <script src="firebase-utils.js"></script>
+    <script src="components.js"></script>
+    <script src="router.js"></script>
+    <script src="app.js"></script>
+</body>
 </html>
