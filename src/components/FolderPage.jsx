@@ -95,19 +95,32 @@ const FolderPage = () => {
         throw new Error('Not enough aura dates generated');
       }
 
-      // Use the second aura date as the initial current date
-      const secondAuraDate = new Date(auraDates[1]);
-      secondAuraDate.setHours(0, 0, 0, 0);
+      // Find the next aura date after the start date
+      let nextAuraDate = null;
+      for (let i = 0; i < auraDates.length; i++) {
+        const auraDate = new Date(auraDates[i]);
+        auraDate.setHours(0, 0, 0, 0);
+        if (auraDate > startDate) {
+          nextAuraDate = auraDate;
+          break;
+        }
+      }
+
+      // If no next aura date found, use the second aura date
+      if (!nextAuraDate && auraDates.length >= 2) {
+        nextAuraDate = new Date(auraDates[1]);
+        nextAuraDate.setHours(0, 0, 0, 0);
+      }
 
       // Log the aura dates for debugging
       console.log('Task #' + serialNumber + ' Aura dates:', auraDates.map(date => formatDate(date)));
-      console.log('Using second aura date:', formatDate(secondAuraDate));
+      console.log('Using next aura date:', formatDate(nextAuraDate));
 
-      // Create the task with the second aura date
+      // Create the task with the next aura date
       await addDoc(collection(db, collectionName), {
         serialNumber,
         endDate: endDateObj.toISOString(),
-        currentDate: secondAuraDate.toISOString(),
+        currentDate: nextAuraDate.toISOString(),
         currentAuraIndex: 1,
         text1: '',
         text2: '',
